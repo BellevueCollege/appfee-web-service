@@ -14,9 +14,9 @@
  */
 
 /**
- * Load the user configurable constants.
+ * Load configuration structures.
  */
-require( 'configuration.php' );
+require( 'include/configuration-structures.php' );
 
 /**
  * Defines the application version number.
@@ -88,12 +88,11 @@ switch ( $application_request ) {
 		 */
 		require( 'view/post-authorization-view.php' );
 
+		// Configuration objects.
+		$database_configuration = new Database_Configuration();
+
 		// Model view controller objects.
-		$model = new Post_Authorization_Model(
-			DATABASE_DSN,
-			DATABASE_USER,
-			DATABASE_PASSWORD
-		);
+		$model      = new Post_Authorization_Model( $database_configuration );
 		$controller = new Post_Authorization_Controller( $model );
 		$view       = new Post_Authorization_View( $controller, $model );
 
