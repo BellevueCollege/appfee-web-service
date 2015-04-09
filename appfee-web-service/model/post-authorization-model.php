@@ -108,18 +108,17 @@ class Post_Authorization_Model extends Default_Model {
 	 * @since 1.0.0
 	 *
 	 * @see Post_Authorization_Model::$database_connection
+	 * @see Post_Authorization_Model::$save_data_values
 	 *
-	 * @param string $data_source_name Data source name definition.
-	 * @param string $username         User name for the data source definition.
-	 * @param string $password         Password for the data source definition.
+	 * @param object $database_configuration Database configuration object.
 	 */
-	public function __construct( $data_source_name, $username, $password ) {
+	public function __construct( $database_configuration ) {
 		parent::__construct();
 
 		$this->database_connection = new PDO(
-			$data_source_name,
-			$username,
-			$password
+			$database_configuration->get_data_source_name(),
+			$database_configuration->get_username(),
+			$database_configuration->get_password()
 		);
 
 		$this->save_data_values = array(
