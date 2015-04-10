@@ -100,6 +100,38 @@ switch ( $application_request ) {
 		echo $view->get_output();
 		break;
 
+	case 'get-settlements':
+		/**
+		 * Load class file for Get Settlements Model.
+		 */
+		require( 'model/get-settlements-model.php' );
+
+		/**
+		 * Load class file for Get Settlements Controller.
+		 */
+		require( 'controller/get-settlements-controller.php' );
+
+		/**
+		 * Load class file for Get Settlements View.
+		 */
+		require( 'view/get-settlements-view.php' );
+
+		// Configuration objects.
+		$database_configuration = new Database_Configuration();
+		$reports_configuration  = new CyberSource_Report_Configuration();
+
+		// Model view controller objects.
+		$model = new Get_Settlements_Model(
+			$database_configuration,
+			$reports_configuration
+		);
+		$controller = new Get_Settlements_Controller( $model );
+		$view       = new Get_Settlements_View( $controller, $model );
+
+		// Get output
+		echo $view->get_output();
+		break;
+
 		default:
 			/**
 			 * Load class file for Post Authorization View.
