@@ -1,3 +1,4 @@
+/* usp_WebAppFeeUpdatePayment */
 USE [ODS]
 GO
 
@@ -54,6 +55,46 @@ BEGIN
 				SET PaymentSettled = getdate()
 				WHERE ReferenceNumber = @ReferenceNumber
 		END
+
+
+END
+
+GO
+
+/* usp_WebAppFeeGetEmptySettlementReferences */
+USE [ODS]
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_WebAppFeeGetEmptySettlementReferences]    Script Date: 04/10/2015 14:50:18 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[usp_WebAppFeeGetEmptySettlementReferences]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[usp_WebAppFeeGetEmptySettlementReferences]
+GO
+
+USE [ODS]
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_WebAppFeeGetEmptySettlementReferences]    Script Date: 04/10/2015 14:50:18 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+/****************************************************************************************************************************************************
+CREATED:
+04/09/2015   Smruthi Madhugiri    This stored procedure is created to return the Reference detail and payment authorization datetime
+								  for those payments that have not been settled yet and it returns results from current date to a month back.
+
+****************************************************************************************************************************************************/
+CREATE PROCEDURE [dbo].[usp_WebAppFeeGetEmptySettlementReferences]
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	SELECT ReferenceNumber, ReferenceNumberCreation, PaymentAuthorization
+	FROM vw_BCAdmission
+	WHERE PaymentSettled IS NULL and ReferenceNumberCreation between dateadd(month, -1, GETDATE()) and GETDATE();
 
 
 END
