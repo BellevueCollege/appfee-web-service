@@ -23,6 +23,38 @@
 define( 'BASE_URI', '' );
 
 /**
+ * The CyberSource merchant identification.
+ *
+ * @since 1.0.0
+ * @var string
+ */
+define( 'CYBERSOURCE_MERCHANT_ID', '' );
+
+/**
+ * CyberSource user name with access to reports.
+ *
+ * @since 1.0.0
+ * @var string
+ */
+define( 'CYBERSOURCE_REPORT_USER', '' );
+
+/**
+ * CyberSource report user password.
+ *
+ * @since 1.0.0
+ * @var string
+ */
+define( 'CYBERSOURCE_REPORT_PASSWORD', '' );
+
+/**
+ * CyberSource report query URL.
+ *
+ * @since 1.0.0
+ * @var string
+ */
+define( 'CYBERSOURCE_REPORT_URL', '' );
+
+/**
  * Defines the data source name (database connection parameters).
  *
  * @since 1.0.0
